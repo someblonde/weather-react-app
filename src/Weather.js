@@ -1,14 +1,13 @@
   
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
+
 import "./Weather.css";
 
 
 
 export default function Weather() {
 
- let [city, setCity] = useState("");
-  let [weather, setWeather] = useState("");
+
 
   let weatherData = {
     city: "Horsham",
