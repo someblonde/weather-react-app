@@ -39,7 +39,7 @@ export default function Weather() {
       <div className="card" style={{ width: "18rem" }}>
         <div className="card-body">
           <h5 className="card-title">{weatherData.city}</h5>
-          <h6 className="card-subtitle mb-2 text-muted"></h6>
+          
           <h6>{weatherData.date}</h6>
           <div className="weather-icon">
             <img
