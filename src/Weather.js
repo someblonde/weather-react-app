@@ -4,238 +4,127 @@ import DateTime from "./DateTime";
 import "./Weather.css";
 
 export default function Weather() {
- let [city, setCity] = useState("");
- let [weather, setWeather] = useState({});
- let [active, setActive] = useState(false);
-
-    
-   
-    function displayWeather(response) {
-  console.log(response.data);
-  document.querySelector("#city").innerHTML = response.data.name;
-  celsiusTemperature = response.data.main.temp;
-  document.querySelector("#temperature").innerHTML = Math.round(
-    celsiusTemperature
-  );
-  document.querySelector("#humidity").innerHTML = Math.round(
-    response.data.main.temp
-  );
-  document.querySelector("#wind").innerHTML = Math.round(
-    response.data.wind.speed
-  );
-
-  document.querySelector("#description").innerHTML =
-    response.data.weather[0].main;
-
-    
-
-    celsiusTemperature = response.data.main.temp;
-    let iconElement = document.querySelector("#icon");
-  iconElement.setAttribute(
-    "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
-    iconElement.setAttribute("alt", response.data.weather[0].description);
-}
-   
-function displayForecast(response){
-  let forecastElement = document.querySelector("#forecast");
-  forecastElement.innerHTML = null;
-  let forecast = null;
-   
-  for (let index = 0; index <6; index++) {
-      forecast = response.data.list[index];
-     forecastElement.innerHTML  +=`<div class="col">
-        ${formatHours(forecast.dt * 1000)} <br />
-        <img src ="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" 
-        alt="icons" class="hours" 
-        />
-        <div class="weather-forecast-temperature">
-          <strong>${Math.round (forecast.main.temp_max)}°</strong> ${Math.round(forecast.main.temp_min)}°
-        </div>
-      </div>`;
-
-  }}
-
- 
-
-     
-
-function search(event) {
-  event.preventDefault();
-  let apiKey = "eadddec13a962cb9c3c421b81823ffb8";
-  let city = document.querySelector("#city");
-  let searchInput = document.querySelector("#search-text-input");
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&appid=${apiKey}&units=metric`;
- 
-  city.innerHTML = `${searchInput.value}`;
-  axios.get(apiUrl).then(displayWeather);
-
-  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayForecast);
-  
-}
+  let weatherData = {
+    city: "Horsham",
+    temperature: "21",
+    date: "Friday 14:00",
+    description: "Partly sunny",
+    imgUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
+    humidity: 75,
+    wind: 7
+  };
 
 
- function searchLocation(position) {
-  let apiKey = "eadddec13a962cb9c3c421b81823ffb8";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayWeather);
-  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayForecast);
-}
-
-
-function getCurrentlocation(event) {
-  event.preventDefault();
-  navigator.geolocation.getCurrentPosition(searchLocation);
-}
-
-let form = document.querySelector("#search-form");
-form.addEventListener("submit", search);
-
-let currentLocationbutton = document.querySelector("#current-location-button");
-currentLocationbutton.addEventListener("click", getCurrentlocation);
-
-
-function displayFahrenheitTemperature(event){
-  event.preventDefault();
-   celsiusLink.classList.remove("active");
-   fahrenheitLink.classList.add("active");
-  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML=Math.round(fahrenheitTemperature);
-}
-
-function displayCelsiusTemperature(event){
-  event.preventDefault();
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active")
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
-}
-
-
-
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
-
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", displayCelsiusTemperature);
-
-let celsiusTemperature = null;
-    
-}
-
- if (active) {
-    return (
-        <div class="Weather">
-      </br>
-      <form id="search-form" class="search-block">
-        </br>
-        <input
-          type="text"
-          id="search-text-input"
-          placeholder="Enter a location"
-        />
+  return (
+    <div className="Weather">
+      <form className="search-block">
+        <input type="text" placeholder="Enter a location" />
         <input type="submit" />
-
         <button
           type="current-location-button"
           id="current-location-button"
-          class="btn btn-secondary btn-sm"
+          className="btn btn-secondary btn-sm"
         >
           Current
         </button>
       </form>
-      </br>
-      <div class="card" style="width: 18rem">
-        <div class="card-body">
-          <h5 class="card-title" id="city">Horsham, UK </h5>
-          <h6 class="card-subtitle mb-2 text-muted"></h6>
-          <h6 id="day-time">Friday 7:00pm</h6>
-          <div class ="weather-icon">
-            <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
-            alt="Cloudy"
-            id="icon"
-            class="main"
+      <br />
+      <div className="card" style={{ width: "18rem" }}>
+        <div className="card-body">
+          <h5 className="card-title">{weatherData.city}</h5>
+          <h6 className="card-subtitle mb-2 text-muted"></h6>
+          <h6>{weatherData.date}</h6>
+          <div className="weather-icon">
+            <img
+              src={weatherData.imgUrl}
+              alt={weatherData.description}
+              className="main"
             />
-          
-          <span id="temperature"></span>
-          <span class="units"
-            ><a href="#" id="celsius-link" class="active">°C</a> | 
-            <a href="#" id="fahrenheit-link"> °F </a></span
-          >
+
+            <span>{weatherData.temperature}</span>
+            <span className="units">
+              <a href="/">°C</a> |<a href="/"> °F </a>
+              <div>{weatherData.description}</div>
+            </span>
           </div>
 
-          <li>Humidity: <span class="humidity" id="humidity"></span>%</li>
-          <li>Wind: <span class="wind" id="wind"></span>km/h</li>
+          <li>Humidity:{weatherData.humidity}%</li>
+          <li>Wind:{weatherData.wind}km/h</li>
         </div>
-        <p class="card-text" id="description"></p>
+        <p className="card-text"></p>
       </div>
-    </div>
 
-    <br />
-    <br />
-    <div class="row" id="forecast">
-      <div class="col">
-          12:00 </br>
-        <img src ="https://ssl.gstatic.com/onebox/weather/48/rain_light.png"  
-        alt="icons" class="hours" 
-        />
-        <div class="weather-forecast-temperature">
-          <strong>16°</strong> 15°
+      <br />
+      <br />
+      <div className="row">
+        <div className="col">
+          12:00 <br />
+          <img
+            src="https://ssl.gstatic.com/onebox/weather/48/rain_light.png"
+            alt="icons"
+            className="hours"
+          />
+          <div className="weather-forecast-temperature">
+            <strong>16°</strong> 15°
+          </div>
+        </div>
+        <div className="col">
+          12:00 <br />
+          <img
+            src="https://ssl.gstatic.com/onebox/weather/48/rain_light.png"
+            alt="icons"
+            className="hours"
+          />
+          <div className="weather-forecast-temperature">
+            <strong>15°</strong> 12°
+          </div>
+        </div>
+        <div className="col">
+          12:00 <br />
+          <img
+            src="https://ssl.gstatic.com/onebox/weather/48/rain_light.png"
+            alt="icons"
+            className="hours"
+          />
+          <div className="weather-forecast-temperature">
+            <strong>10°</strong> 15°
+          </div>
+        </div>
+        <div className="col">
+          12:00 <br />
+          <img
+            src="https://ssl.gstatic.com/onebox/weather/48/rain_light.png"
+            alt="icons"
+            className="hours"
+          />
+          <div className="weather-forecast-temperature">
+            <strong>16°</strong> 18°
+          </div>
+        </div>
+        <div className="col">
+          12:00 <br />
+          <img
+            src="https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png"
+            alt="icons"
+            className="hours"
+          />
+          <div className="weather-forecast-temperature">
+            <strong>17°</strong> 15°
+          </div>
+        </div>
+        <div className="col">
+          12:00 <br />
+          <img
+            src="https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png"
+            alt="icons"
+            className="hours"
+          />
+          <div className="weather-forecast-temperature">
+            <strong>17°</strong> 15°
+          </div>
         </div>
       </div>
-       <div class="col">
-          12:00 </br>
-        <img src ="https://ssl.gstatic.com/onebox/weather/48/rain_light.png" 
-        alt="icons" class="hours" 
-        />
-        <div class="weather-forecast-temperature">
-          <strong>15°</strong> 12°
-        </div>
-      </div>
-       <div class="col">
-          12:00 </br>
-        <img src ="https://ssl.gstatic.com/onebox/weather/48/rain_light.png" 
-        alt="icons" class="hours" 
-        />
-        <div class="weather-forecast-temperature">
-          <strong>10°</strong> 15°
-        </div>
-      </div>
-       <div class="col">
-          12:00 </br>
-        <img src ="https://ssl.gstatic.com/onebox/weather/48/rain_light.png" 
-        alt="icons" class="hours" 
-        />
-        <div class="weather-forecast-temperature">
-          <strong>16°</strong> 18°
-        </div>
-      </div>
-       <div class="col">
-          12:00 </br>
-        <img src ="https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png" 
-        alt="icons" class="hours" 
-        />
-        <div class="weather-forecast-temperature">
-          <strong>17°</strong> 15°
-        </div>
-      </div>
-       <div class="col">
-          12:00 </br>
-        <img src ="https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png" 
-        alt="icons" class="hours" 
-        />
-        <div class="weather-forecast-temperature">
-          <strong>17°</strong> 15°
-        </div>
-      </div>
-      
-      </div>
-      
     </div>
-    )
- }
+  );
+}
 
