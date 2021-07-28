@@ -1,9 +1,15 @@
+  
 import React, { useState } from "react";
 import axios from "axios";
-import DateTime from "./DateTime";
 import "./Weather.css";
 
+
+
 export default function Weather() {
+
+ let [city, setCity] = useState("");
+  let [weather, setWeather] = useState("");
+
   let weatherData = {
     city: "Horsham",
     temperature: "21",
@@ -13,6 +19,8 @@ export default function Weather() {
     humidity: 75,
     wind: 7
   };
+
+
 
 
   return (
@@ -127,4 +135,6 @@ export default function Weather() {
     </div>
   );
 }
+
+
 
