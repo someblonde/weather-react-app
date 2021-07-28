@@ -1,0 +1,167 @@
+body {
+  background-image: url("clouds.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 900px;
+  display: block;
+  margin: 10px auto 100px auto;
+}
+
+h5 {
+  color: #2c2f3d;
+  font-size: 25px;
+}
+
+h6 {
+  color: #3c4154;
+  font-size: 17px;
+}
+
+span {
+ 
+  font-size: 35px;
+  font-weight: bold;
+  color: #2c2f3d;
+  opacity: 90%;
+}
+
+li {
+  display: block;
+  font-size: 17px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+container{
+  padding-bottom: 40px;
+}
+
+.hours{
+  height: 48px;
+   margin: 10px;
+   width: 48px;
+   vertical-align: middle;
+   
+}
+   
+img{
+  margin-left: -15px;
+  
+}
+
+
+
+.icons{
+    display: flex;
+  align-items: center;
+}
+
+.forecast {
+  padding-top: 5px;
+  padding-bottom: 90px;
+}
+
+.card {
+  background-color: #f6e2f1;
+  border-color: #646a87;
+  border-width: 2px;
+  padding: 10px;
+  margin: 10px 200px 200px 200px;
+  box-sizing:content-box
+}
+
+.card-body .active {
+  color: black;
+  cursor: default;
+}
+
+.card-body .active:hover {
+  text-decoration: none;
+ 
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  top: -170px;
+  padding: 5px;
+  font-size: 19px;
+  font-weight: normal;
+  color: #2c2f3d;
+  margin-right: -10px;
+  margin-left: -10px;
+  flex-wrap: wrap;
+ 
+}
+
+.card-text {
+  padding:  30px;
+  color:#2c2f3d;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 18px;
+    margin: -10px;
+   
+  
+}
+
+.units {
+  font-size: 15px;
+}
+
+.hundity-text{
+  font-size: larger;
+}
+
+.humidity {
+  font-size: 22px;
+}
+
+.wind {
+  font-size: 22px;
+}
+
+.search-block{
+  display: block;
+  margin: 10px 10px 10px 180px;
+}
+
+
+
+.btn-secondary {
+  color: #180c28;
+  background-color: #d3dffd;
+  border-color: #180c28;
+  transition: 0.4s;
+  border-radius: 5px;
+  font-size: 17px;
+  margin: 4px;
+  margin-bottom: 7px;
+}
+
+.btn-secondary:hover {
+  background-color: #b3c9fc;
+  color: #180c28;
+}
+
+input[type="submit"] {
+  border-color: #180c28;
+  font-size: 18px;
+  border-radius: 5px;
+  padding: 3.5px 10px 3.5px 10px;
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+input[type="submit"]:hover {
+  background-color: #aaaaaa;
+  color: #180c28;
+  transition: 0.4s;
+}
+
+
+
+small{
+margin: 200px 200px 200px 265px;
+}
